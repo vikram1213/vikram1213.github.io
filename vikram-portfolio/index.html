@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Vikram Pathak | Software Engineer</title>
-    <meta name="description" content="Vikram Pathak Portfolio - Software Engineer & Full Stack Developer">
+    
+    <title>Vikram Pathak | Software Engineer Portfolio</title>
+    <meta name="description" content="Vikram Pathak - Software Engineer & Full Stack Developer. Computer Science Graduate based in Satna, MP.">
+    <meta property="og:title" content="Vikram Pathak | Software Engineer">
+    <meta property="og:description" content="Modern Portfolio of Vikram Pathak, Full Stack Developer.">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
@@ -21,12 +27,11 @@
             --border: rgba(255, 255, 255, 0.1);
         }
 
-        /* Basic Setup */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
         body { background-color: var(--bg); color: #fff; overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* --- Canvas Particles --- */
-        #bg-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+        /* --- Background Animation --- */
+        #bg-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; width: 100%; height: 100%; }
 
         /* --- Sidebar Contacts --- */
         .sidebar {
@@ -39,7 +44,7 @@
             display: flex; align-items: center; justify-content: center;
             color: white; font-size: 1.2rem; text-decoration: none;
             transition: 0.4s; backdrop-filter: blur(10px);
-            opacity: 0; animation: slideIn 0.8s ease forwards;
+            animation: slideIn 0.8s ease forwards; opacity: 0;
         }
         @keyframes slideIn { from { transform: translateX(-50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         .sidebar a:hover { 
@@ -58,7 +63,7 @@
         .hero h1 span { background: linear-gradient(to right, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .typing-text { font-size: 1.5rem; color: #94a3b8; height: 30px; font-weight: 300; }
 
-        /* --- Sections --- */
+        /* --- Content Layout --- */
         section { padding: 80px 10%; max-width: 1200px; margin: 0 auto; }
         .section-title { font-size: 2.5rem; margin-bottom: 40px; display: flex; align-items: center; gap: 15px; }
         .section-title::after { content: ""; height: 1px; flex: 1; background: var(--border); }
@@ -83,7 +88,7 @@
                 flex-direction: row; gap: 15px; width: fit-content;
             }
             .sidebar a { width: 45px; height: 45px; }
-            section { padding: 60px 5%; margin-bottom: 80px; }
+            section { padding: 60px 5%; margin-bottom: 100px; }
             .hero h1 { font-size: 3.5rem; }
             .section-title { font-size: 1.8rem; }
         }
@@ -96,11 +101,11 @@
     <canvas id="bg-canvas"></canvas>
 
     <div class="sidebar">
-        <a href="https://wa.me/918085207207?text=Hi Vikram, I am interested in hiring you" target="_blank"><i class="fab fa-whatsapp"></i></a>
-        <a href="tel:+918085207207"><i class="fas fa-phone-alt"></i></a>
-        <a href="mailto:vikrampathakofficial@gmail.com?subject=Hiring Inquiry"><i class="far fa-envelope"></i></a>
-        <a href="https://linkedin.com/in/vikram-pathak03" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-        <a href="https://github.com/vikram1213" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://wa.me/918085207207?text=Hi Vikram, I am interested in hiring you" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="tel:+918085207207" title="Call"><i class="fas fa-phone-alt"></i></a>
+        <a href="mailto:vikrampathakofficial@gmail.com?subject=Hiring Inquiry" title="Email"><i class="far fa-envelope"></i></a>
+        <a href="https://linkedin.com/in/vikram-pathak03" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/vikram1213" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
     </div>
 
     <div class="hero">
@@ -163,20 +168,20 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Initialize AOS
+        // Start AOS
         AOS.init({ duration: 1000, once: true });
 
-        // Typewriter Effect
+        // Typewriter Animation
         const text = "Full Stack Web Developer | UI/UX Enthusiast | Problem Solver";
-        let i = 0;
-        function type() {
-            if (i < text.length) {
-                document.getElementById("typewriter").innerHTML += text.charAt(i);
-                i++;
-                setTimeout(type, 80);
+        let idx = 0;
+        function typeWriter() {
+            if (idx < text.length) {
+                document.getElementById("typewriter").innerHTML += text.charAt(idx);
+                idx++;
+                setTimeout(typeWriter, 80);
             }
         }
-        window.onload = type;
+        window.addEventListener('load', typeWriter);
 
         // Particle Background System
         const canvas = document.getElementById('bg-canvas');
@@ -216,12 +221,12 @@
 
         for (let i = 0; i < 80; i++) particles.push(new Particle());
 
-        function animate() {
+        function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animate);
+            requestAnimationFrame(animateParticles);
         }
-        animate();
+        animateParticles();
     </script>
 </body>
 </html>
